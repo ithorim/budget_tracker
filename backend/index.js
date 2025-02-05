@@ -6,6 +6,7 @@ const config = require('./config');
 const app = express();
 
 const authRoutes = require("./routes/auth");
+const transactionRoutes = require("./routes/transaction");
 
 mongoose.connect(config.dbConnection)
     .then(() => console.log('Connected to MongoDB'))
@@ -13,6 +14,8 @@ mongoose.connect(config.dbConnection)
 
 app.use(express.json());
 app.use("/auth", authRoutes);
+app.use("/transaction", transactionRoutes);
+
 // app.use(cors());
 
 app.get('/', (req, res) => {

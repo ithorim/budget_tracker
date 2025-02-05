@@ -1,4 +1,5 @@
 const passport = require("passport");
+const passportJwt = require("passport-jwt");
 const LocalStrategy = require("passport-local").Strategy
 const UserModel = require("../../models/user");
 const config = require("../../config");
@@ -24,5 +25,18 @@ passport.use(new LocalStrategy(localOptions, async function(email, password, don
         return done(error)
     }
 }));
+
+const jwtOptions = {
+    secretOrKey: config.secretKey,
+    jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken()
+}
+
+passport.use(new passportJwt.Strategy(jwtOptions, async function(payload, done) {
+    const user = await UserModel.findOne({_id: payload._id});
+    if(!user)
+        return done(null, false, {message: "User authorization failed."});
+
+    done(null, user);
+}))
 
 module.exports = passport;
