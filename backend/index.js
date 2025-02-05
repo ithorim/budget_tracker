@@ -5,7 +5,14 @@ const config = require('./config');
 
 const app = express();
 
+const authRoutes = require("./routes/auth");
+
+mongoose.connect(config.dbConnection)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => console.log(`Could not connect to MongoDB: ${err}`));
+
 app.use(express.json());
+app.use("/auth", authRoutes);
 // app.use(cors());
 
 app.get('/', (req, res) => {
