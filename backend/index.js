@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require('./config');
-// const cors = require("cors");
+const cors = require("cors");
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/transaction", transactionRoutes);
 
-// app.use(cors());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send("Hi from the budget app!");

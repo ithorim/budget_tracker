@@ -2,9 +2,37 @@ const mongoose = require("mongoose");
 
 const TransactionSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
-    amount: { type: Number, required: true },
+    type: { type: String, enum: ["income", "expense"], required: true },
+    amount: { 
+        type: Number, 
+        required: true,
+        min: [1, 'Amount must be positive']
+    },
     currency: {type: String, enum: ["RSD", "EUR", "USD"], required: true, default: "RSD"},
-    category: { type: String, enum: ["Food", "Rent", "Utilities", "Transport", "Entertainment", "Other"], required: true },
+    category: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function(value) {
+                const incomeCategories = ["Salary", "Freelance", "Investment", "Other Income"];
+                const expenseCategories = ["Food", "Rent", "Utilities", "Transport", "Entertainment", "Other Expense"];
+                
+                if (this.type === "income") {
+                    const isValid = incomeCategories.includes(value);
+                    if (!isValid) {
+                        this.invalidate('category', `For income transactions, category must be one of: ${incomeCategories.join(', ')}`);
+                    }
+                    return isValid;
+                } else {
+                    const isValid = expenseCategories.includes(value);
+                    if (!isValid) {
+                        this.invalidate('category', `For expense transactions, category must be one of: ${expenseCategories.join(', ')}`);
+                    }
+                    return isValid;
+                }
+            }
+        }
+    },
     date: { type: Date, default: Date.now },
     description: { type: String}
 })
