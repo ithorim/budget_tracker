@@ -18,7 +18,7 @@ TransactionSchema.statics.getUserTransactions = async function(userId) {
 }
 
 TransactionSchema.statics.getTransactionById = async function(id, userId) {
-    const transaction = await this.findOne({ _id: id, userId });
+    const transaction = await this.findOne({ _id: id, userId }) // .populate("userId", "name email id");
     if(!transaction) throw new Error("Transaction not found.");
 
     return transaction;
