@@ -1,14 +1,39 @@
+.split-layout {
+  display: flex;
+  min-height: 100vh;  // This makes it take full viewport height
+}
+
+.login-section {
+  width: 33.333%;
+  background-color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;  // Stack children vertically
+  justify-content: center; // Center vertically in the section
+}
+
+.info-section {
+  flex: 1;  // Takes remaining space (two thirds)
+  background-color: #F2F2FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: rgb(30, 24, 112);
+}
+
 .login-container {
+    width: 100%;
     max-width: 400px;
-    margin: 50px auto;
+    margin: 0 auto;  // Center horizontally
+    margin-bottom: 24px;  // Space between container and signup section
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background-color: #ffffff;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 24px;
 
     label {
         display: block;
@@ -16,6 +41,7 @@
         font-size: 12px;
         font-weight: 500;
         line-height: 18px;
+        color: rgb(68, 70, 73);
     }
 
     input {
@@ -55,4 +81,70 @@ button {
     &:hover {
         background-color: #56569b;
     }
+}
+
+.signup-section {
+    border-top: 1px solid rgb(212, 215, 219);
+    display: flex;
+    flex-direction: column;  // Stack children vertically
+    align-items: center;
+    gap: 8px;  // Space between text and button
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.need-account {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(96, 99, 103);
+}
+
+.signup-button {
+    background-color: rgb(243, 244, 246);
+    color: rgb(26, 21, 35);
+    padding: 10px;  // Match the sign in button padding
+    font-size: 14px;
+    width: 100%;  // Make it full width like the sign in button
+    
+    &:hover {
+        background-color: rgb(229, 231, 235);
+    }
+}
+
+.password-reset-div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+
+    a {
+        text-decoration: none;
+        color: rgb(86, 86, 155);
+        &:hover {
+            color: rgb(66, 66, 122);
+        }
+    }
+    
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    align-items: center;
+}
+
+.info-header {
+    font-size: 28px;
+    line-height: 42px;
+}
+
+.info-paragraph {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 32px;
+    line-height: 48px;
+    text-align: center;
 }
