@@ -4,6 +4,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #ffffff;
 }
 
 .form-group {
@@ -12,22 +13,30 @@
     label {
         display: block;
         margin-bottom: 5px;
+        font-size: 12px;
         font-weight: 500;
+        line-height: 18px;
     }
 
     input {
         width: 100%;
         padding: 12px 15px;
-        border: 1px solid #ddd;
+        border: none;
         border-radius: 4px;
-        font-size: 16px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        font-family: inherit;
         transition: border-color 0.2s ease;
         box-sizing: border-box;
-
+        background-color: #f3f5f7;
+        border: 1px solid transparent;
         &:focus {
             outline: none;
-            border-color: #0056b3;
-            box-shadow: 0 0 0 2px rgba(0,86,179,0.1);
+            border: 1px solid rgb(68, 70, 73);
+        }
+        &:hover {
+            border: 1px solid rgb(96, 99, 103);
         }
     }
 }
@@ -35,13 +44,15 @@
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #1e1870;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #56569b;
     }
 }
