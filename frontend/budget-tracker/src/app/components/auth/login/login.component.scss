@@ -1,35 +1,10 @@
-.split-layout {
-  display: flex;
-  min-height: 100vh;  // This makes it take full viewport height
-}
-
-.login-section {
-  width: 33.333%;
-  background-color: white;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;  // Stack children vertically
-  justify-content: center; // Center vertically in the section
-}
-
-.info-section {
-  flex: 1;  // Takes remaining space (two thirds)
-  background-color: #F2F2FF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  color: rgb(30, 24, 112);
-}
-
 .login-container {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;  // Center horizontally
     margin-bottom: 24px;  // Space between container and signup section
     padding: 20px;
-    border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--color-surface);
 }
 
 .form-group {
@@ -41,7 +16,7 @@
         font-size: 12px;
         font-weight: 500;
         line-height: 18px;
-        color: rgb(68, 70, 73);
+        color: var(--color-text-secondary);
     }
 
     input {
@@ -55,14 +30,14 @@
         font-family: inherit;
         transition: border-color 0.2s ease;
         box-sizing: border-box;
-        background-color: #f3f5f7;
+        background-color: var(--color-input-background);
         border: 1px solid transparent;
         &:focus {
             outline: none;
-            border: 1px solid rgb(68, 70, 73);
+            border: 1px solid var(--color-text-secondary);
         }
         &:hover {
-            border: 1px solid rgb(96, 99, 103);
+            border: 1px solid var(--color-text-tertiary);
         }
     }
 }
@@ -70,21 +45,21 @@
 button {
     width: 100%;
     padding: 10px;
-    background-color: #1e1870;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-surface);
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
     font-size: 16px;
 
     &:hover {
-        background-color: #56569b;
+        background-color: var(--color-primary-hover);
     }
 }
 
 .signup-section {
-    border-top: 1px solid rgb(212, 215, 219);
+    border-top: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;  // Stack children vertically
     align-items: center;
@@ -98,23 +73,23 @@ button {
 .need-account {
     margin: 0;
     font-size: 14px;
-    color: rgb(96, 99, 103);
+    color: var(--color-text-tertiary);
 }
 
 .signup-button {
-    background-color: rgb(243, 244, 246);
-    color: rgb(26, 21, 35);
+    background-color: var(--color-button-ligh-purple);
+    color: var(--color-primary-link);
     padding: 10px;  // Match the sign in button padding
     font-size: 14px;
     width: 100%;  // Make it full width like the sign in button
     
     &:hover {
-        background-color: rgb(229, 231, 235);
+        background-color: var(--color-button-light-purple-hover);
     }
 }
 
 .password-reset-div {
-    margin-top: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     font-size: 14px;
@@ -122,29 +97,9 @@ button {
 
     a {
         text-decoration: none;
-        color: rgb(86, 86, 155);
+        color: var(--color-primary-link);
         &:hover {
-            color: rgb(66, 66, 122);
+            color: var(--color-primary-link-hover);
         }
     }
-    
-}
-
-.info-content {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    align-items: center;
-}
-
-.info-header {
-    font-size: 28px;
-    line-height: 42px;
-}
-
-.info-paragraph {
-    font-family: 'IBM Plex Serif', serif;
-    font-size: 32px;
-    line-height: 48px;
-    text-align: center;
 }

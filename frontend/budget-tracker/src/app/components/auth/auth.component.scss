@@ -1,0 +1,82 @@
+.split-layout {
+    display: flex;
+    min-height: 100vh;  // This makes it take full viewport height
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+  
+.auth-section {
+    width: 33.333%;
+    background-color: var(--color-surface);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        min-height: 100vh;
+        max-height: 100vh;
+        padding: 20px;  // Reduce padding on mobile
+        box-sizing: border-box; // This is crucial
+    }
+}
+
+.info-section {
+    flex: 1;  // Takes remaining space (two thirds)
+    background-color: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--color-primary);
+
+    @media (max-width: 768px) {
+        display: none;  // Hide on mobile
+    }
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    align-items: center;
+}
+
+.info-header {
+    font-size: 28px;
+    line-height: 42px;
+}
+
+.info-paragraph {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 32px;
+    line-height: 48px;
+    text-align: center;
+}
+
+.login-container,
+.register-container,
+.reset-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--color-surface);
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        padding: 0;  // Remove padding on mobile
+        margin: 0;   // Remove margin on mobile
+        max-width: 100%;
+    }
+}
+
+.form-group input {
+    @media (max-width: 768px) {
+        font-size: 16px; // Prevents iOS zoom on input focus
+    }
+}
+

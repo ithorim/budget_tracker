@@ -12,8 +12,8 @@ export class LoginComponent {
 
   constructor(private router: Router) {}
 
-  onSubmit() {
-    console.log('Login attempted with:', { email: this.email, password: this.password });
+  login() {
+    
   }
 
 }

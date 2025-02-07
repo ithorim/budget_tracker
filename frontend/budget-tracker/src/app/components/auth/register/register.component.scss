@@ -1,0 +1,92 @@
+
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    padding: 20px;
+    background-color: var(--color-surface);
+}
+.form-container {
+    margin-bottom: 34px;
+}
+.form-group {
+    margin-bottom: 24px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+        color: var(--color-text-secondary);
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        font-family: inherit;
+        transition: border-color 0.2s ease;
+        box-sizing: border-box;
+        background-color: var(--color-input-background);
+        border: 1px solid transparent;
+        &:focus {
+            outline: none;
+            border: 1px solid var(--color-text-secondary);
+        }
+        &:hover {
+            border: 1px solid var(--color-text-tertiary);
+        }
+    }
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+
+    &:hover {
+        background-color: var(--color-primary-hover);
+    }
+}
+
+.signin-section {
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;  // Stack children vertically
+    align-items: center;
+    gap: 8px;  // Space between text and button
+    width: 100%;
+    max-width: 400px;
+    margin: 30px 0;
+    
+}
+
+.have-account {
+    margin-top:20px;
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+}
+
+.signin-button {
+    background-color: var(--color-button-ligh-purple);
+    color: var(--color-primary-link);
+    padding: 10px;  // Match the sign in button padding
+    font-size: 14px;
+    width: 100%;  // Make it full width like the sign in button
+    
+    &:hover {
+        background-color: var(--color-button-light-purple-hover);
+    }
+}

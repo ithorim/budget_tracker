@@ -1,0 +1,28 @@
+:root {
+    // light theme (default)
+    --color-primary: #1e1870;
+    --color-primary-hover: #56569b;
+    --color-primary-link: rgb(86, 86, 155);
+    --color-primary-link-hover: rgb(66, 66, 122);
+    
+    --color-background: #F2F2FF;
+    --color-surface: #ffffff;
+    --color-input-background: #f3f5f7;
+    
+    --color-border: rgb(212, 215, 219);
+    
+    --color-text-primary: rgb(26, 21, 35);
+    --color-text-secondary: rgb(68, 70, 73);
+    --color-text-tertiary: rgb(96, 99, 103);
+
+    --color-button-secondary: rgb(243, 244, 246);
+    --color-button-secondary-hover: rgb(229, 231, 235);
+    --color-button-ligh-purple: rgb(242, 242, 255);
+    --color-button-light-purple-hover: rgb(225, 225, 249);
+}
+
+// dark theme: to do
+[data-theme="dark"] {
+    // We'll implement dark theme colors later
+    // Placeholder for dark theme variables
+}
