@@ -16,10 +16,14 @@ export const loginGuard: CanActivateFn = (route, state) => {
   return authService.verifyToken().pipe(
     map((response) => { // if token is valid, redirect to home
       if(response.isValid) {
-        router.navigate(['home']);
+        router.navigate(['dashboard']);
         return false;
       }
       return true;
+    }),
+    catchError(() => {
+      localStorage.removeItem('token'); // Clean up invalid token
+      return of(true);  // Allow access to login page
     })
-  )
+  );
 };
