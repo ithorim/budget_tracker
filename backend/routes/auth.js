@@ -23,4 +23,11 @@ router.post("/login",
     }
 )
 
+router.get("/verifyToken",
+    passport.authenticate('jwt', {session: false}),
+    async (req, res) => {
+        res.status(200).json({ isValid: true });
+    }
+)
+
 module.exports = router;

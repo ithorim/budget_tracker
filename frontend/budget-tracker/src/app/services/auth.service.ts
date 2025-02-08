@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Enviroment } from '../env/env';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthResponse, User } from '../models/auth.models';
 
 @Injectable({
@@ -21,6 +21,22 @@ export class AuthService {
   register(user: User): Observable<AuthResponse> {
     const token = this.httpClient.post<AuthResponse>(`${this.backUrl}/register`, user);
     return token;
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  verifyToken(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if(!token) {
+      return of(false);
+    }
+    const httpHeaders = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.httpClient.get<any>(`${this.backUrl}/verifyToken`, { headers: httpHeaders });
   }
 
 }
