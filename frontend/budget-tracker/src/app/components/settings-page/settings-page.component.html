@@ -10,14 +10,29 @@
         <form (ngSubmit)="updateProfile()">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" required name="name" [(ngModel)]="user.name">
+                <input type="text" id="name" required name="name" [(ngModel)]="updatedUser.name">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" required name="email" [(ngModel)]="user.email">
+                <input 
+                    type="email" 
+                    id="email" 
+                    required 
+                    name="email" 
+                    [(ngModel)]="updatedUser.email"
+                    (ngModelChange)="onEmailChange()">
+                <span class="validation-error" *ngIf="showEmailExistsError()">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="utils_field-error-icon__dZ0eI" icon="warning" aria-hidden="true" alt="" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"></path><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"></path></svg>
+                    User with this email already exists
+                </span>
             </div>
             <div class="button-container">
-                <button type="submit">Update Profile</button>
+                <button 
+                    type="submit"
+                    [disabled]="!isProfileUpdateValid()"
+                    [ngClass]="{'disabled': !isProfileUpdateValid()}">
+                    Update Profile
+                </button>
             </div>
         </form>
     </div>

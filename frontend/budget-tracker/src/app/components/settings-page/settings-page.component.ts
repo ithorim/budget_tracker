@@ -17,6 +17,11 @@ export class SettingsPageComponent implements OnInit {
   user: User = {
     name: '',
     email: '',
+  }
+
+  updatedUser: User = {
+    name: '',
+    email: '',
     password: ''
   }
 
@@ -24,9 +29,16 @@ export class SettingsPageComponent implements OnInit {
   newPassword: string = '';
   confirmPassword: string = '';
 
+  private emailExists = false;
+
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe((user) => {
       this.user = user;
+      this.updatedUser = {
+        name: user.name,
+        email: user.email,
+        password: ''
+      };
     });
   }
 
@@ -50,22 +62,89 @@ export class SettingsPageComponent implements OnInit {
            this.newPassword !== this.confirmPassword;
   }
 
+  showEmailExistsError(): boolean {
+    return this.emailExists && this.updatedUser.email !== this.user.email;
+  }
+
+  isEmailValid(): boolean {
+    return !this.showEmailExistsError();
+  }
+
+  isProfileUpdateValid(): boolean {
+    return (this.updatedUser.name !== this.user.name || 
+            this.updatedUser.email !== this.user.email) &&
+            this.isEmailValid();
+  }
+
   updateProfile() {
-    this.successMessage = 'Profile updated successfully';
+    // clear any existing messages
+    this.successMessage = '';
     this.errorMessage = '';
+
+    if (!this.isProfileUpdateValid() || !this.updatedUser.name || !this.updatedUser.email) {
+        this.errorMessage = 'Please check your name and email entries';
+        return;
+    }
+
+    this.userService.updateUserInfo(this.updatedUser.name, this.updatedUser.email)
+        .subscribe({
+            next: () => {
+                this.successMessage = 'User information updated successfully';
+                // Update the current user info to match the updated info
+                this.user = {
+                    ...this.user,
+                    name: this.updatedUser.name,
+                    email: this.updatedUser.email
+                };
+            },
+            error: (error) => {
+                if (error.status === 400) {
+                    this.errorMessage = error.error.message;
+                } else {
+                    this.errorMessage = 'An error occurred while updating user information';
+                }
+            }
+        });
   }
 
   updatePassword() {
-    if (!this.isPasswordChangeValid()) {
-      this.errorMessage = 'Please check your password entries';
-      return;
-    }
-    
-    this.successMessage = 'Password updated successfully';
+    // Clear any existing messages
+    this.successMessage = '';
     this.errorMessage = '';
-    
-    this.currentPassword = '';
-    this.newPassword = '';
-    this.confirmPassword = '';
+
+    if (!this.isPasswordChangeValid()) {
+        this.errorMessage = 'Please check your password entries';
+        return;
+    }
+
+    this.userService.updatePassword(this.currentPassword, this.newPassword)
+        .subscribe({
+            next: () => {
+                this.successMessage = 'Password updated successfully';
+                // Reset form
+                this.currentPassword = '';
+                this.newPassword = '';
+                this.confirmPassword = '';
+            },
+            error: (error) => {
+                if (error.status === 400) {
+                    this.errorMessage = error.error.message;
+                } else {
+                    this.errorMessage = 'An error occurred while updating the password';
+                }
+            }
+        });
+  }
+
+  onEmailChange() {
+    if (this.updatedUser.email === this.user.email) {
+        this.emailExists = false;
+        return;
+    }
+    // when your subscribe to an Observable, you will receive the actuacl boolean value
+    this.userService.checkEmailExists(this.updatedUser.email)
+        .subscribe(exists => {
+            this.emailExists = exists;
+        });
   }
 }
