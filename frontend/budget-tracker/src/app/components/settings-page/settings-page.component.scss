@@ -1,14 +1,13 @@
-
 .settings-container {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 30px 20px 20px 20px;
+    max-width: 37.5rem;
+    margin: 1.875rem auto;
+    padding: 1.875rem 1.25rem 1.25rem 1.25rem;
     border: 1px solid var(--color-border);
 
     h2 {
-        margin-bottom: 20px;
-        font-size: 20px;
-        line-height: 27px;
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.6875rem;
         font-weight: 400;
         color: var(--color-text-secondary);
     }
@@ -19,9 +18,9 @@
 }
 
 .settings-section {
-    margin-bottom: 20px;
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
+    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--color-border);
 
     &:last-child {
@@ -44,10 +43,14 @@
         width: 100%;
         padding: 0.75rem;
         border: 1px solid var(--color-border);
-        border-radius: 6px;
-        font-size: 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
         color: var(--color-text-secondary);
         font-family: var(--font-family-mono);
+
+        &.error {
+            border-color: var(--dark-orange);
+        }
     }
 
     &:focus {
@@ -62,18 +65,58 @@ button {
     background-color: var(--color-primary);
     color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-size: 1rem;
     font-family: var(--font-family-primary);
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border: none;
 
+    &:disabled,
+    &.disabled {
+        background-color: var(--color-text-tertiary);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
 }
 
 .change-password-button {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 .button-container {
     display: flex;
     justify-content: flex-end;
+}
+
+.alert_success,
+.alert_error {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    
+    p {
+        margin: 0;
+    }
+}
+
+.alert_error {
+    background-color: var(--light-orange);
+    color: var(--dark-orange);
+    border: 1px solid var(--mid-orange);
+}
+
+.alert_success {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    border: 1px solid var(--mid-green);
+}
+
+.validation-error {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--dark-orange);
 }

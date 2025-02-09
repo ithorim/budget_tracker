@@ -2,7 +2,7 @@
     display: flex;
     min-height: 100vh;  // This makes it take full viewport height
 
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) { // 768px
         flex-direction: column;
     }
 }
@@ -10,16 +10,16 @@
 .auth-section {
     width: 33.333%;
     background-color: var(--color-surface);
-    padding: 40px;
+    padding: 2.5rem; // 40px
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) { // 768px
         width: 100%;
         min-height: 100vh;
         max-height: 100vh;
-        padding: 20px;  // Reduce padding on mobile
+        padding: 1.25rem; // 20px
         box-sizing: border-box; // This is crucial
     }
 }
@@ -30,10 +30,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 2.5rem; // 40px
     color: var(--color-primary);
 
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) { // 768px
         display: none;  // Hide on mobile
     }
 }
@@ -41,19 +41,19 @@
 .info-content {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    max-width: 37.5rem; // 600px
     align-items: center;
 }
 
 .info-header {
-    font-size: 28px;
-    line-height: 42px;
+    font-size: 1.75rem; // 28px
+    line-height: 2.625rem; // 42px
 }
 
 .info-paragraph {
     font-family: 'IBM Plex Serif', serif;
-    font-size: 32px;
-    line-height: 48px;
+    font-size: 2rem; // 32px
+    line-height: 3rem; // 48px
     text-align: center;
 }
 
@@ -61,22 +61,22 @@
 .register-container,
 .reset-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 25rem; // 400px
     margin: 0 auto;
-    padding: 20px;
+    padding: 1.25rem; // 20px
     background-color: var(--color-surface);
     box-sizing: border-box;
 
-    @media (max-width: 768px) {
-        padding: 0;  // Remove padding on mobile
-        margin: 0;   // Remove margin on mobile
+    @media (max-width: 48rem) { // 768px
+        padding: 0;
+        margin: 0;
         max-width: 100%;
     }
 }
 
 .form-group input {
-    @media (max-width: 768px) {
-        font-size: 16px; // Prevents iOS zoom on input focus
+    @media (max-width: 48rem) { // 768px
+        font-size: 1rem; // 16px
     }
 }
 

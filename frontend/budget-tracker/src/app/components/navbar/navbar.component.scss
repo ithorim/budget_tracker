@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0.625rem;
     background-color: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
 }
@@ -23,10 +23,10 @@
         border: none;
         background-color: transparent;
         cursor: pointer;
-        font-size: 16px;
-        line-height: 20px;
-        padding: .6rem .8rem;
-        border-radius: 8px;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.5rem;
         font-family: 'IBM Plex Sans', sans-serif;
         
         &:hover {
@@ -43,7 +43,7 @@
                 text-align: center;
                 bottom: 0;
                 left: 50%;
-                transform: translate(-50%, 11px);
+                transform: translate(-50%, 0.6875rem);
                 width: 80%;
                 height: 1px;
                 background-color: var(--dark-orange);
@@ -59,10 +59,10 @@
     button {
         border: none;
         cursor: pointer;
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 1rem;
+        line-height: 1.25rem;
         padding: 0.6rem 1rem;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         font-family: 'IBM Plex Sans', sans-serif;
     }
     
@@ -94,7 +94,7 @@
                 position: absolute;
                 bottom: 0;
                 left: 50%;
-                transform: translate(-50%, 11px);
+                transform: translate(-50%, 0.6875rem);
                 width: 80%;
                 height: 1px;
                 background-color: var(--dark-orange);
