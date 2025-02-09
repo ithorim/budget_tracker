@@ -1,0 +1,105 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-brand a {
+    color: var(--color-text-secondary);
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+
+    button {
+        position: relative; 
+        color: var(--color-text-secondary);
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 20px;
+        padding: .6rem .8rem;
+        border-radius: 8px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        
+        &:hover {
+            background-color: var(--light-orange);
+            color: var(--dark-orange);
+        }
+
+        &.active {
+            color: var(--dark-orange);
+            
+            &::after {
+                content: '';
+                position: absolute;
+                text-align: center;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 11px);
+                width: 80%;
+                height: 1px;
+                background-color: var(--dark-orange);
+            }
+        }
+    }
+}
+
+.logout-settings {
+    display: flex;
+    gap: 2rem;
+
+    button {
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        font-family: 'IBM Plex Sans', sans-serif;
+    }
+    
+
+    .logout-button {
+        background-color: var(--light-orange);
+        color: var(--dark-orange);
+    
+        &:hover {
+            background-color: var(--mid-orange);
+        }
+    }
+    
+    .settings-button {
+        position: relative; 
+        background-color: transparent;
+        color: var(--color-text-secondary);
+    
+        &:hover {
+            background-color: var(--light-orange);
+            color: var(--dark-orange);
+        }
+    
+        &.active {
+            color: var(--dark-orange);
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 11px);
+                width: 80%;
+                height: 1px;
+                background-color: var(--dark-orange);
+            }
+        }
+    }
+    
+}

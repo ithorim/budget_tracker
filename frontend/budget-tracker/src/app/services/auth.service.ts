@@ -39,4 +39,10 @@ export class AuthService {
     return this.httpClient.get<any>(`${this.backUrl}/verifyToken`, { headers: httpHeaders });
   }
 
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return token !== null;
+  }
+
+  
 }

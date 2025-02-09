@@ -9,16 +9,24 @@
     --color-surface: #ffffff;
     --color-input-background: #f3f5f7;
     
-    --color-border: rgb(212, 215, 219);
+    --color-border: rgb(223, 227, 231);
     
     --color-text-primary: rgb(26, 21, 35);
-    --color-text-secondary: rgb(68, 70, 73);
+    --color-text-secondary: #606067;
     --color-text-tertiary: rgb(96, 99, 103);
 
     --color-button-secondary: rgb(243, 244, 246);
     --color-button-secondary-hover: rgb(229, 231, 235);
     --color-button-ligh-purple: rgb(242, 242, 255);
     --color-button-light-purple-hover: rgb(225, 225, 249);
+
+    --light-orange: #feefec;
+    --mid-orange: #FDDFD8;
+    --dark-orange: #f4603e;
+
+    // Font family variables
+    --font-family-primary: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-family-mono: 'IBM Plex Mono', 'Courier New', Courier, monospace;
 }
 
 // dark theme: to do

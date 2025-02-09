@@ -1,0 +1,79 @@
+
+.settings-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px 20px 20px 20px;
+    border: 1px solid var(--color-border);
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 20px;
+        line-height: 27px;
+        font-weight: 400;
+        color: var(--color-text-secondary);
+    }
+
+    label {
+        color: var(--color-text-secondary);
+    }
+}
+
+.settings-section {
+    margin-bottom: 20px;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+}
+
+.form-group {
+    margin-bottom: 1rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        font-size: 1rem;
+        color: var(--color-text-secondary);
+        font-family: var(--font-family-mono);
+    }
+
+    &:focus {
+        color: var(--color-text);
+        outline: none;
+        border: 1px solid var(--color-border);
+        box-shadow: none;
+    }
+}
+
+button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--font-family-primary);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.change-password-button {
+    margin-bottom: 20px;
+}
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}

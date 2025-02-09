@@ -1,0 +1,14 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a routerLink="/dashboard">Budget Tracker</a>
+    </div>
+    <div class="nav-links">
+        <button routerLink="/dashboard" routerLinkActive="active">Dashboard</button>
+        <button routerLink="/transactions" routerLinkActive="active">Transactions</button>
+        <button routerLink="/planner" routerLinkActive="active">Planner</button>
+    </div>
+    <div class="logout-settings">
+        <button class="settings-button" routerLink="/settings" routerLinkActive="active">Settings</button>
+        <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
+</nav>
