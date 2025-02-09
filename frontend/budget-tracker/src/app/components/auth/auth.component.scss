@@ -51,7 +51,7 @@
 }
 
 .info-paragraph {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: var(--font-family-serif);
     font-size: 2rem; // 32px
     line-height: 3rem; // 48px
     text-align: center;

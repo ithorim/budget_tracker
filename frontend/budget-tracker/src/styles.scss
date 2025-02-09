@@ -14,3 +14,9 @@ body {
   line-height: 1.5;
   background-color: white;
 }
+
+html {
+  // had to add this as if dashboard was causing the scroll bar to appear while other pages did not
+  // thus resulting in movement of elements between different routerLinkActive pages
+  overflow-y: scroll; /* Always show vertical scrollbar */
+}
