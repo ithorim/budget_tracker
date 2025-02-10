@@ -11,7 +11,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
-import { PlannerComponent } from './components/planner/planner.component';
 import { SettingsPageComponent } from './components/settings-page/settings-page.component';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { SettingsPageComponent } from './components/settings-page/settings-page.
     DashboardComponent,
     NavbarComponent,
     TransactionsComponent,
-    PlannerComponent,
     SettingsPageComponent,
   ],
   imports: [

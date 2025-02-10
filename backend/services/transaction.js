@@ -75,6 +75,15 @@ const getMonthlySummary = async (userId) => {
     }
 };
 
+const getPaginatedTransactions = async (userId, options) => {
+    try {
+        const result = await TransactionModel.getPaginatedTransactions(userId, options);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     create,
     getUserTransactions,
@@ -82,5 +91,6 @@ module.exports = {
     update,
     remove,
     getRecentTransactions,
-    getMonthlySummary
+    getMonthlySummary,
+    getPaginatedTransactions
 };

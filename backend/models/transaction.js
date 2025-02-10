@@ -76,6 +76,47 @@ TransactionSchema.statics.getRecentTransactions = async function(userId) {
         .limit(5);
 }
 
+TransactionSchema.statics.getPaginatedTransactions = async function(userId, options = {}) {
+    const {
+        page = 1,
+        limit = 10,
+        type,
+        category,
+        startDate,
+        endDate,
+        search
+    } = options;
+
+    // Build query
+    const query = { userId };
+    
+    // Add filters if they exist
+    if (type) query.type = type;
+    if (category) query.category = category;
+    if (search) query.description = new RegExp(search, 'i');
+    if (startDate || endDate) {
+        query.date = {};
+        if (startDate) query.date.$gte = new Date(startDate);
+        if (endDate) query.date.$lte = new Date(endDate);
+    }
+
+    // Get total count for pagination
+    const total = await this.countDocuments(query);
+    
+    // Get paginated results
+    const transactions = await this.find(query)
+        .sort({ date: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit === -1 ? null : limit);
+
+    return {
+        transactions,
+        total,
+        page: Number(page),
+        totalPages: limit === -1 ? 1 : Math.ceil(total / limit)
+    };
+}
+
 const TransactionModel = mongoose.model("transaction", TransactionSchema);
 
 module.exports = TransactionModel;

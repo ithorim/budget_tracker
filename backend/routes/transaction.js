@@ -23,10 +23,24 @@ router.get("/",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
         try {
-            const transactions = await transactionService.getUserTransactions(req.user.id);
-            res.json(transactions);
+            const options = {
+                page: parseInt(req.query.page) || 1,
+                limit: parseInt(req.query.limit) || 10,
+                type: req.query.type || undefined,
+                category: req.query.category || undefined,
+                search: req.query.search || undefined,
+                startDate: req.query.startDate || undefined,
+                endDate: req.query.endDate || undefined
+            };
+
+            const result = await transactionService.getPaginatedTransactions(req.user.id, options);
+            res.json(result);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            console.error('Error in getPaginatedTransactions:', error);
+            res.status(500).json({ 
+                message: "Error fetching transactions",
+                error: error.message 
+            });
         }
     }
 )

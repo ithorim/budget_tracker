@@ -1,0 +1,220 @@
+* {
+    font-family: var(--font-family-sans) !important;
+}
+.transactions-container {
+    max-width: 75rem;
+    margin: 2rem auto;
+    padding: 0 1.25rem;
+}
+
+.filters-section {
+    background-color: var(--color-surface);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--color-border);
+}
+
+.filters-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 10rem;
+
+    label {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+    }
+
+    select, input {
+        height: 36px;
+        padding: 0 0.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        box-sizing: border-box;
+        
+        &:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+    }
+}
+
+.search-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0.5rem;
+
+    input {
+        flex-grow: 1;
+    }
+
+    button {
+        height: 36px;
+        padding: 0 1rem;
+        background-color: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: var(--color-primary-hover);
+        }
+    }
+}
+
+.transactions-list {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .transaction-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .primary-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            .description {
+                font-weight: 400;
+            }
+
+            .category {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.5rem;
+                background-color: var(--light-purple);
+                color: var(--dark-purple);
+            }
+        }
+
+        .date {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+    }
+
+    .amount-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .amount {
+            font-weight: 500;
+            
+            &.income {
+                color: var(--dark-green);
+            }
+            
+            &.expense {
+                color: var(--dark-orange);
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+
+            .icon-button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.25rem;
+                color: var(--color-text-secondary);
+
+                &:hover {
+                    color: var(--color-primary);
+                }
+
+                &.delete:hover {
+                    color: var(--dark-orange);
+                }
+            }
+        }
+    }
+}
+
+.no-transactions {
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-text-secondary);
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    margin-top: 1rem;
+
+    .page-size {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        label {
+            color: var(--color-text-secondary);
+        }
+
+        select {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 0.375rem;
+        }
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            background-color: var(--color-surface);
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &:not(:disabled):hover {
+                background-color: var(--color-button-secondary);
+            }
+        }
+
+        .page-info {
+            color: var(--color-text-secondary);
+        }
+    }
+}
