@@ -4,66 +4,50 @@
     margin: 0 auto;
 
     .summary-cards {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(15.625rem, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-        justify-content: center;
-        align-items: stretch;
-        border: 1px solid var(--color-border);
-        
-        @media (max-width: 48rem) { // 768px
-            grid-template-columns: 1fr;
-            max-width: 25rem;
-            margin-left: auto;
-            margin-right: auto;
+        h2 {
+            font-size: 1.25rem;
+            color: var(--color-text-primary);
+            font-weight: 500;
         }
 
-        .card {
-            border-radius: 0.5rem;
-            // border: 1px solid var(--color-border);
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-            min-height: 8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
 
-            h3 {
-                font-size: 1.5rem;
-                font-weight: 400;
-            }
-            
-            &.incomeCard {
-                // background-color: var(--light-green);
-                color: var(--dark-green);
-                // border: 1px solid var(--mid-green);
-            }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            .card {
+                // background: white;
+                padding: 1.5rem;
+                border: 1px solid var(--color-border);
+                text-align: center;
+                // border-radius: 0.75rem;
+                // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-            &.expenseCard {
-                // background-color: var(--light-orange);
-                color: var(--dark-orange);
-                // border: 1px solid var(--mid-orange);
-            }
-
-            &.netCard {
-                // background-color: var(--light-purple);
-                color: var(--dark-purple);
-                // border: 1px solid var(--mid-purple);
-            }
-
-            .amount {
-                font-size: 1.5rem;
-                font-weight: 400;
-                // font-family: var(--font-family-serif);
-                &.income {
-                    color: var(--dark-green);
+                h3 {
+                    font-size: 1rem;
+                    color: var(--color-text-secondary);
+                    margin-bottom: 0.5rem;
                 }
-                &.expense {
-                    color: var(--dark-orange);
-                }
-                &.net {
-                    color: var(--dark-purple);
+
+                .amount {
+                    font-size: 1.5rem;
+                    font-weight: 400;
+
+                    &.income {
+                        color: var(--dark-green);
+                    }
+
+                    &.expense {
+                        color: var(--dark-orange);
+                    }
+
+                    &.net {
+                        color: var(--dark-purple);
+                    }
                 }
             }
         }
@@ -111,7 +95,7 @@
             padding: 0.6rem 0.8rem;
             border-radius: 0.5rem;
             &:hover {
-                color: var(--medium-purple);
+                color: var(--dark-purple);
                 background-color: var(--light-purple);
             }
         }
@@ -137,7 +121,7 @@
                 .primary-info {
                     display: flex;
                     align-items: center;
-                    gap: 0.5rem;
+                    gap: 0.8rem;
 
                     .description {
                         font-weight: 400;
@@ -146,7 +130,7 @@
                     .category {
                         font-size: 0.75rem;
                         padding: 0.25rem 0.5rem;
-                        border-radius: 1rem;
+                        border-radius: 0.5rem;
                         background-color: var(--light-purple);
                         color: var(--dark-purple);
                     }

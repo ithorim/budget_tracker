@@ -30,6 +30,7 @@ router.get("/",
         }
     }
 )
+
 // get all of logged-in user's recent transaction
 router.get("/recent",
     passport.authenticate("jwt", { session: false }),
@@ -39,6 +40,19 @@ router.get("/recent",
             res.json(transactions);
         } catch (error) {
             res.status(500).json({ message: "Error fetching recent transactions" });
+        }
+    }
+);
+
+// get monthly summary
+router.get("/monthly-summary",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const summary = await transactionService.getMonthlySummary(req.user.id);
+            res.json(summary);
+        } catch (error) {
+            res.status(500).json({ message: "Error fetching monthly summary" });
         }
     }
 );

@@ -8,6 +8,9 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     hash: { type: String, required: true },
     salt: { type: String, required: true }
+    // bcrypt stores salt in the hash so the salt property is not needed
+    // it is needed if use crypto library
+    // but lets leave it here for now
 })
 
 UserSchema.methods.savePassword = async function(password) {

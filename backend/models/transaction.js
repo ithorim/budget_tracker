@@ -70,6 +70,12 @@ TransactionSchema.statics.deleteTransaction = async function(id, userId) {
     return transaction;
 }
 
+TransactionSchema.statics.getRecentTransactions = async function(userId) {
+    return await this.find({ userId })
+        .sort({ date: -1 })
+        .limit(5);
+}
+
 const TransactionModel = mongoose.model("transaction", TransactionSchema);
 
 module.exports = TransactionModel;
