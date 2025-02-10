@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Enviroment } from '../env/env';
+import { Environment } from '../env/env';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { AuthResponse, User } from '../models/auth.models';
@@ -9,7 +9,7 @@ import { AuthResponse, User } from '../models/auth.models';
 })
 export class AuthService {
 
-  private backUrl = Enviroment.backUrl + '/auth';
+  private backUrl = Environment.backUrl + '/auth';
 
   constructor(private httpClient: HttpClient) { }
 

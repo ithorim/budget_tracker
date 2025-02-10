@@ -30,6 +30,18 @@ router.get("/",
         }
     }
 )
+// get all of logged-in user's recent transaction
+router.get("/recent",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const transactions = await transactionService.getRecentTransactions(req.user.id);
+            res.json(transactions);
+        } catch (error) {
+            res.status(500).json({ message: "Error fetching recent transactions" });
+        }
+    }
+);
 
 // get single transaction
 router.get("/:id",

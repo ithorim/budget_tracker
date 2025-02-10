@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/auth.models';
-import { Enviroment } from '../env/env';
+import { Environment } from '../env/env';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 @Injectable({
@@ -9,7 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
   
-  private backUrl = Enviroment.backUrl + '/user';
+  private backUrl = Environment.backUrl + '/user';
 
   constructor(private httpClient: HttpClient) { }
 

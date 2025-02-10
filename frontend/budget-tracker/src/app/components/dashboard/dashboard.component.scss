@@ -87,7 +87,94 @@
 }
 
 .recent-transaction {
-    width: 100%;
+    padding: 1.5rem;
     border: 1px solid var(--color-border);
-    min-height: 20rem;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .view-all {
+            color: var(--color-text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-family: var(--font-family-primary);
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.5rem;
+            &:hover {
+                color: var(--medium-purple);
+                background-color: var(--light-purple);
+            }
+        }
+    }
+
+    .transaction-list {
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--color-border);
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .transaction-info {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                .primary-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    .description {
+                        font-weight: 400;
+                    }
+
+                    .category {
+                        font-size: 0.75rem;
+                        padding: 0.25rem 0.5rem;
+                        border-radius: 1rem;
+                        background-color: var(--light-purple);
+                        color: var(--dark-purple);
+                    }
+                }
+
+                .date {
+                    font-size: 0.875rem;
+                    color: var(--color-text-secondary);
+                }
+            }
+
+            .amount {
+                font-weight: 400;
+                
+                &.income {
+                    color: var(--dark-green);
+                }
+                
+                &.expense {
+                    color: var(--dark-orange);
+                }
+            }
+        }
+
+        .no-transactions {
+            text-align: center;
+            color: var(--color-text-secondary);
+            padding: 1rem 0;
+        }
+    }
 }

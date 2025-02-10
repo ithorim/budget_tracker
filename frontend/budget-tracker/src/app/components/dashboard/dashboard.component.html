@@ -23,7 +23,21 @@
             <button class="view-all" routerLink="/transactions">View All</button>
         </div>
         <div class="transaction-list">
-
+            <div class="transaction-item" *ngFor="let transaction of recentTransactions">
+                <div class="transaction-info">
+                    <div class="primary-info">
+                        <span class="description">{{ transaction.description }}</span>
+                        <span class="category">{{ transaction.category }}</span>
+                    </div>
+                    <span class="date">{{ transaction.date | date:'mediumDate' }}</span>
+                </div>
+                <span class="amount" [ngClass]="{'income': transaction.type === 'income', 'expense': transaction.type === 'expense'}">
+                    {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency }}
+                </span>
+            </div>
+            <div class="no-transactions" *ngIf="recentTransactions.length === 0">
+                No recent transactions
+            </div>
         </div>
     </div>
 </div>

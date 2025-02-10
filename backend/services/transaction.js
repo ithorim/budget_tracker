@@ -20,10 +20,22 @@ const remove = async (id, userId) => {
     return await TransactionModel.deleteTransaction(id, userId);
 }
 
+const getRecentTransactions = async (userId) => {
+    try {
+        const transactions = await TransactionModel.find({ userId: userId })
+            .sort({ date: -1 })
+            .limit(5);
+        return transactions;
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     create,
     getUserTransactions,
     getTransactionById,
     update,
-    remove
- };
+    remove,
+    getRecentTransactions
+};
