@@ -95,6 +95,7 @@ export class TransactionsComponent implements OnInit {
       this.selectedCategory = ''; // reset category when type changes
     } else {
       this.categories = [];
+      this.selectedCategory = ''; // Reset category here too
     }
     this.filters.type = this.selectedType || undefined;
     this.filters.category = undefined;
