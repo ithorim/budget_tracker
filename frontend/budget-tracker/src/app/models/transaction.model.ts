@@ -9,10 +9,6 @@ export interface Transaction {
     description?: string;
 }
 
-/**
- * Interface for transaction filter parameters
- * Used to pass filter state between component and service
- */
 export interface TransactionFilters {
     type?: 'income' | 'expense';
     category?: string;
@@ -23,10 +19,6 @@ export interface TransactionFilters {
     limit?: number;
 }
 
-/**
- * Response format for paginated transactions
- * Returned by backend when fetching transactions
- */
 export interface PaginatedTransactions {
     transactions: Transaction[];
     total: number;

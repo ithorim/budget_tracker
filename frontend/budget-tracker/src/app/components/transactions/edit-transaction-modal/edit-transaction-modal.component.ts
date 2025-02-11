@@ -21,14 +21,14 @@ export class EditTransactionModalComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['transaction'] && this.transaction) {
-      // Create a deep copy of the transaction
+      // create a deep copy of the transaction
       this.editedTransaction = {
         ...this.transaction,
         date: new Date(this.transaction.date)
       };
-      // Get categories based on transaction type
+      // get categories based on transaction type
       this.categories = this.transactionService.getCategories(this.transaction.type);
-      // If no category is set, set the first category as default
+      // if no category is set, set the first category as default
       if (!this.editedTransaction.category) {
         this.editedTransaction.category = this.categories[0];
       }
@@ -55,9 +55,9 @@ export class EditTransactionModalComponent implements OnChanges {
 
   onTypeChange() {
     if (this.editedTransaction) {
-      // Update categories based on new type
+      // update categories based on new type
       this.categories = this.transactionService.getCategories(this.editedTransaction.type);
-      // Set the first category as default instead of empty string
+      // set the first category as default instead of empty string
       this.editedTransaction.category = this.categories[0];
     }
   }

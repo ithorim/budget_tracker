@@ -14,7 +14,6 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { SettingsPageComponent } from './components/settings-page/settings-page.component';
 import { EditTransactionModalComponent } from './components/transactions/edit-transaction-modal/edit-transaction-modal.component';
 import { DeleteTransactionModalComponent } from './components/transactions/delete-transaction-modal/delete-transaction-modal.component';
-import { CreateTransactionModalComponent } from './components/transactions/create-transaction-modal/create-transaction-modal.component';
 import { AddTransactionModalComponent } from './components/transactions/add-transaction-modal/add-transaction-modal.component';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { AddTransactionModalComponent } from './components/transactions/add-tran
     SettingsPageComponent,
     EditTransactionModalComponent,
     DeleteTransactionModalComponent,
-    CreateTransactionModalComponent,
     AddTransactionModalComponent
   ],
   imports: [

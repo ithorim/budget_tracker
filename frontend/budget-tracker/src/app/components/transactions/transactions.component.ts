@@ -3,12 +3,6 @@ import { Transaction, TransactionFilters } from '../../models/transaction.model'
 import { TransactionService } from '../../services/transaction.service';
 import { Router } from '@angular/router';
 
-/**
- * Manages the transaction list view with filtering and pagination
- * - Maintains filter state (type, category, search, dates)
- * - Handles pagination controls
- * - Updates view when filters/page changes
- */
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -22,13 +16,13 @@ export class TransactionsComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions = [5, 10, 20, -1]; // -1 represents 'all'
   
-  // Filter state
+  // filter state
   filters: TransactionFilters = {
     page: 1,
     limit: 10
   };
 
-  // Filter UI state
+  // filter UI state
   selectedType: 'income' | 'expense' | '' = '';
   categories: string[] = [];
   selectedCategory = '';
@@ -36,11 +30,11 @@ export class TransactionsComponent implements OnInit {
   startDate?: Date;
   endDate?: Date;
 
-  // UI state
+  // ui state
   loading = false;
   errorMessage = '';
 
-  // Add to existing properties
+  // add to existing properties
   selectedTransaction: Transaction | null = null;
   isEditModalOpen = false;
   isDeleteModalOpen = false;
@@ -91,14 +85,14 @@ export class TransactionsComponent implements OnInit {
 
   onPageSizeChange(size: number): void {
     this.filters.limit = size;
-    this.filters.page = 1; // Reset to first page
+    this.filters.page = 1; // reset to first page
     this.loadTransactions();
   }
 
   onTypeChange(): void {
     if (this.selectedType) {
       this.categories = this.transactionService.getCategories(this.selectedType);
-      this.selectedCategory = ''; // Reset category when type changes
+      this.selectedCategory = ''; // reset category when type changes
     } else {
       this.categories = [];
     }
@@ -121,7 +115,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   onDateChange(): void {
-    // Convert string dates to Date objects if they exist
+    // convert string dates to Date objects if they exist
     this.filters.startDate = this.startDate ? new Date(this.startDate) : undefined;
     this.filters.endDate = this.endDate ? new Date(this.endDate) : undefined;
     this.filters.page = 1;

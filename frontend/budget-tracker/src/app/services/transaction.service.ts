@@ -38,17 +38,16 @@ export class TransactionService {
   }
 
   /**
-   * Fetches paginated transactions with optional filters
-   * Flow:
-   * 1. Component calls this with optional TransactionFilters
-   * 2. Service builds query params from filters
-   * 3. Backend applies filters and returns paginated results
-   * 4. Component receives PaginatedTransactions and updates view
+   * fetches paginated transactions with optional filters
+   * 1. component calls this with optional TransactionFilters
+   * 2. service builds query params from filters
+   * 3. backend applies filters and returns paginated results
+   * 4. component receives PaginatedTransactions and updates view
    */
   getTransactions(filters: TransactionFilters = {}): Observable<PaginatedTransactions> {
     const token = localStorage.getItem('token');
     if (!token) {
-      // Return empty result if not authenticated
+      // return empty result if not authenticated
       return of({ transactions: [], total: 0, page: 1, totalPages: 0 });
     }
 
@@ -56,7 +55,7 @@ export class TransactionService {
       'Authorization': `Bearer ${token}`
     });
 
-    // Build query parameters from filters
+    // build query parameters from filters
     // - page: current page number (default: 1)
     // - limit: items per page (default: 10)
     // - type: transaction type filter (income/expense)
@@ -72,12 +71,12 @@ export class TransactionService {
       .set('startDate', filters.startDate?.toISOString() || '')
       .set('endDate', filters.endDate?.toISOString() || '');
 
-    // Make HTTP request to backend
-    // Backend will:
-    // 1. Apply filters to query
-    // 2. Calculate total matching records
-    // 3. Apply pagination
-    // 4. Return PaginatedTransactions containing:
+    // make http request to backend
+    // backend will:
+    // 1. apply filters to query
+    // 2. calculate total matching records
+    // 3. apply pagination
+    // 4. return PaginatedTransactions containing:
     //    - transactions: Transaction[] for current page
     //    - total: total number of matching records
     //    - page: current page number
@@ -88,12 +87,8 @@ export class TransactionService {
     );
   }
 
-  /**
-   * Returns predefined categories based on transaction type
-   * Used by transaction filters to populate category dropdown
-   * Would be better if it was not hard-coded but that required changing how categories are stored in
-   * The db. Might do it later
-   */
+  // would be better if it was not hard-coded but that required changing how categories are stored in the db
+  // might do it later
   getCategories(type: 'income' | 'expense'): string[] {
     return type === 'income' 
       ? ["Salary", "Freelance", "Investment", "Other Income"]

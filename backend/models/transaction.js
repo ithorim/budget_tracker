@@ -46,7 +46,7 @@ TransactionSchema.statics.getUserTransactions = async function(userId) {
 }
 
 TransactionSchema.statics.getTransactionById = async function(id, userId) {
-    const transaction = await this.findOne({ _id: id, userId }) // .populate("userId", "name email id");
+    const transaction = await this.findOne({ _id: id, userId })
     if(!transaction) throw new Error("Transaction not found.");
 
     return transaction;
@@ -56,7 +56,7 @@ TransactionSchema.statics.updateTransaction = async function (id, userId, update
     const transaction = await this.findOneAndUpdate(
         { _id: id, userId }, // find transaction with these fields
         updatedData, // update with this data
-        { new: true, runValidators: true } // return new object, not original and also validate fields if defined
+        { new: true, runValidators: true } // return new object
     );
     if(!transaction) throw new Error("Transaction not found.");
 
@@ -76,10 +76,6 @@ TransactionSchema.statics.getRecentTransactions = async function(userId) {
         .limit(5);
 }
 
-/**
- * Static method to fetch paginated and filtered transactions
- * Used by transaction service to get user's transactions
- */
 TransactionSchema.statics.getPaginatedTransactions = async function(userId, options = {}) {
     const {
         page = 1,
@@ -91,10 +87,8 @@ TransactionSchema.statics.getPaginatedTransactions = async function(userId, opti
         search
     } = options;
 
-    // Build base query with user ID
     const query = { userId };
     
-    // Add optional filters to query (those that exist)
     if (type) query.type = type;
     if (category) query.category = category;
     if (search) query.description = new RegExp(search, 'i');
@@ -104,10 +98,8 @@ TransactionSchema.statics.getPaginatedTransactions = async function(userId, opti
         if (endDate) query.date.$lte = new Date(endDate);
     }
 
-    // Get total count for pagination
     const total = await this.countDocuments(query);
     
-    // Get paginated results
     const transactions = await this.find(query)
         .sort({ date: -1 })
         .skip((page - 1) * limit)
@@ -121,10 +113,6 @@ TransactionSchema.statics.getPaginatedTransactions = async function(userId, opti
     };
 }
 
-/**
- * Static method to calculate monthly summary of transactions
- * Converts all amounts to EUR and calculates totals
- */
 TransactionSchema.statics.getMonthlySummary = async function(userId) {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);

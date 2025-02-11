@@ -21,13 +21,13 @@ const updatePassword = async (id, currentPassword, newPassword) => {
             throw new Error('User not found');
         }
 
-        // Verify current password using existing validatePassword method
+        // verify current password using existing validatePassword method
         const isMatch = await user.validatePassword(currentPassword);
         if (!isMatch) {
             throw new Error('Current password is incorrect');
         }
 
-        // Update password using existing savePassword method
+        // update password using existing savePassword method
         await user.savePassword(newPassword);
         await user.save();
         
@@ -44,7 +44,7 @@ const updateUserInfo = async (id, name, email) => {
             throw new Error('User not found');
         }
 
-        // Only check if email is taken if it's different from current email
+        // only check if email is taken if it's different from current email
         if (email !== user.email) {
             const emailIsTaken = await checkEmailExists(email);
             if (emailIsTaken) {

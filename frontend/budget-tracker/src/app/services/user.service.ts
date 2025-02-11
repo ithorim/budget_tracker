@@ -53,13 +53,12 @@ export class UserService {
   }
 
   /*
-    When the property name and the variable name are the same, we can use
+    when the property name and the variable name are the same, we can use
     { 
       currentPassword: currentPassword, 
       newPassword: newPassword 
     }
-    It's the same as
-    { currentPassword, newPassword }
+    it's the same as { currentPassword, newPassword }
    */
 
   updateUserInfo(name: string , email: string): Observable<any> {
