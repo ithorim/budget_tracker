@@ -40,6 +40,10 @@ export class TransactionsComponent implements OnInit {
   loading = false;
   errorMessage = '';
 
+  // Add to existing properties
+  selectedTransaction: Transaction | null = null;
+  isEditModalOpen = false;
+
   constructor(
     private transactionService: TransactionService,
     private router: Router
@@ -53,30 +57,29 @@ export class TransactionsComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
 
-    // onInit gets first page with 10 results
     this.transactionService.getTransactions(this.filters)
-      .subscribe({
-        next: (response) => { 
-          this.transactions = response.transactions;
-          this.totalTransactions = response.total;
-          this.currentPage = response.page;
-          this.totalPages = response.totalPages;
-          this.loading = false;
-        },
-        error: (error) => {
-          this.loading = false;
-          console.error('Error loading transactions:', error);
-          
-          if (error.status === 401) {
-            this.errorMessage = 'Your session has expired. Please log in again.';
-            this.router.navigate(['/login']);
-          } else if (error.status === 400) {
-            this.errorMessage = error.error.message || 'Invalid request. Please check your filters.';
-          } else {
-            this.errorMessage = 'Unable to load transactions. Please try again later.';
-          }
+    .subscribe({
+      next: (response) => { 
+        this.transactions = response.transactions;
+        this.totalTransactions = response.total;
+        this.currentPage = response.page;
+        this.totalPages = response.totalPages;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.loading = false;
+        console.error('Error loading transactions:', error);
+        
+        if (error.status === 401) {
+          this.errorMessage = 'Your session has expired. Please log in again.';
+          this.router.navigate(['/login']);
+        } else if (error.status === 400) {
+          this.errorMessage = error.error.message || 'Invalid request. Please check your filters.';
+        } else {
+          this.errorMessage = 'Unable to load transactions. Please try again later.';
         }
-      });
+      }
+    });
   }
 
   onPageChange(page: number): void {
@@ -120,6 +123,21 @@ export class TransactionsComponent implements OnInit {
     this.filters.startDate = this.startDate ? new Date(this.startDate) : undefined;
     this.filters.endDate = this.endDate ? new Date(this.endDate) : undefined;
     this.filters.page = 1;
+    this.loadTransactions();
+  }
+
+  // Add these methods
+  openEditModal(transaction: Transaction) {
+    this.selectedTransaction = transaction;
+    this.isEditModalOpen = true;
+  }
+
+  closeEditModal() {
+    this.selectedTransaction = null;
+    this.isEditModalOpen = false;
+  }
+
+  onTransactionUpdated() {
     this.loadTransactions();
   }
 }

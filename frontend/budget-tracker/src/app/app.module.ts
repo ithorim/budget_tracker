@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { SettingsPageComponent } from './components/settings-page/settings-page.component';
+import { EditTransactionModalComponent } from './components/transactions/edit-transaction-modal/edit-transaction-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SettingsPageComponent } from './components/settings-page/settings-page.
     NavbarComponent,
     TransactionsComponent,
     SettingsPageComponent,
+    EditTransactionModalComponent
   ],
   imports: [
     BrowserModule,

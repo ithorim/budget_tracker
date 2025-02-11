@@ -41,14 +41,11 @@
         </div>
     </div>
 
-    <!-- Add this after the filters section and before the transactions list -->
     <div class="status-messages">
         <!-- Loading spinner -->
         <div class="loading-spinner" *ngIf="loading">
             Loading transactions...
         </div>
-
-        <!-- Error message -->
         <div class="error-message" *ngIf="errorMessage">
             {{ errorMessage }}
         </div>
@@ -69,7 +66,7 @@
                     {{ transaction.type === 'income' ? '+ ' : '- ' }}{{ transaction.amount | currency:transaction.currency:'symbol':'1.2-2' }}
                 </span>
                 <div class="actions">
-                    <button class="icon-button edit" title="Edit transaction">
+                    <button class="icon-button edit" title="Edit transaction" (click)="openEditModal(transaction)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -115,4 +112,11 @@
             </button>
         </div>
     </div>
+
+    <app-edit-transaction-modal
+      [transaction]="selectedTransaction"
+      [isOpen]="isEditModalOpen"
+      (close)="closeEditModal()"
+      (transactionUpdated)="onTransactionUpdated()">
+    </app-edit-transaction-modal>
 </div>

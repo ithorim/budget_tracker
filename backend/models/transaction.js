@@ -161,7 +161,7 @@ TransactionSchema.statics.getMonthlySummary = async function(userId) {
 
     return {
         totalIncomeEUR,
-        totalExrensesEUR,
+        totalExpensesEUR,
         netBalanceEUR: totalIncomeEUR - totalExpensesEUR,
         month: monthNames[now.getMonth()],
         year: now.getFullYear()

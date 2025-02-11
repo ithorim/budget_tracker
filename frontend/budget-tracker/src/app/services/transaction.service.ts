@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Transaction, TransactionFilters, PaginatedTransactions } from '../models/transaction.model';
 import { Environment } from '../env/env';
 import { MonthlySummary } from '../models/monthly-summary.model';
@@ -98,5 +98,22 @@ export class TransactionService {
     return type === 'income' 
       ? ["Salary", "Freelance", "Investment", "Other Income"]
       : ["Food", "Rent", "Utilities", "Transport", "Entertainment", "Other Expense"];
+  }
+
+  updateTransaction(transaction: Transaction): Observable<Transaction> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('No authentication token'));
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.httpClient.put<Transaction>(
+      `${this.backUrl}/${transaction._id}`,
+      transaction,
+      { headers }
+    );
   }
 }
