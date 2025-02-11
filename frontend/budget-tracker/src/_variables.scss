@@ -1,11 +1,12 @@
 :root {
     // light theme (default)
+    --auth-section-background: #F2F2FF;
     --color-primary: #1e1870;
     --color-primary-hover: #56569b;
     --color-primary-link: rgb(86, 86, 155);
     --color-primary-link-hover: rgb(66, 66, 122);
     
-    --color-background: #F2F2FF;
+    --color-background: #ffffff;
     --color-surface: #ffffff;
     --color-input-background: #f3f5f7;
     
@@ -38,10 +39,60 @@
     --font-family-primary: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     --font-family-mono: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     --font-family-serif: 'IBM Plex Serif', serif;
+
+    // Input and select variables
+    --input-background: #ffffff;
+    --input-border: var(--color-border);
+    --input-text: var(--color-text-primary);
+    --input-placeholder: var(--color-text-secondary);
+    --input-hover-border: var(--color-text-secondary);
+    --input-focus-border: var(--color-primary);
+    --input-focus-shadow: rgba(30, 24, 112, 0.1);
 }
 
 // dark theme: to do
 [data-theme="dark"] {
-    // We'll implement dark theme colors later
-    // Placeholder for dark theme variables
+    --auth-section-background: #13131A;
+    --color-primary: #8484d9;
+    --color-primary-hover: #9d9de2;
+    --color-primary-link: rgb(132, 132, 217);
+    --color-primary-link-hover: rgb(157, 157, 226);
+    
+    --color-background: #13131A;
+    --color-surface: #1C1C26;
+    --color-input-background: #252532;
+    
+    --color-border: rgb(47, 47, 66);
+    
+    --color-text-primary: rgb(169, 169, 201);
+    --color-text-secondary: #9999A9;
+    --color-text-accent: #13131A;
+
+    --color-button-secondary: rgb(47, 47, 66);
+    --color-button-secondary-hover: rgb(66, 66, 89);
+    --color-button-ligh-purple: rgba(132, 132, 217, 0.1);
+    --color-button-light-purple-hover: rgba(132, 132, 217, 0.2);
+
+    --light-orange: rgba(244, 96, 62, 0.1);
+    --mid-orange: rgba(244, 96, 62, 0.2);
+    --dark-orange: #ff7659;
+
+    --light-green: rgba(22, 163, 74, 0.1);
+    --mid-green: rgba(22, 163, 74, 0.2);
+    --dark-green: #22c55e;
+    
+    --light-purple: rgba(132, 132, 217, 0.1);
+    --mid-purple: rgba(132, 132, 217, 0.2);
+    --dark-purple: #8484d9;
+
+    --color-button-disabled: rgba(132, 132, 217, 0.5);
+
+    // Input and select variables
+    --input-background: #252532;
+    --input-border: var(--color-border);
+    --input-text: var(--color-text-primary);
+    --input-placeholder: var(--color-text-secondary);
+    --input-hover-border: var(--mid-purple);
+    --input-focus-border: var(--color-primary);
+    --input-focus-shadow: rgba(132, 132, 217, 0.1);
 }

@@ -201,7 +201,7 @@
             border-radius: 0.5rem;
             font-size: 0.875rem;
             cursor: pointer;
-
+            color: var(--color-text-secondary);
             &:disabled {
                 opacity: 0.5;
                 cursor: not-allowed;
@@ -248,7 +248,7 @@
         gap: 0.5rem;
         padding: 0.5rem 1rem;
         background-color: var(--color-primary);
-        color: white;
+        color: var(--color-text-accent);
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;

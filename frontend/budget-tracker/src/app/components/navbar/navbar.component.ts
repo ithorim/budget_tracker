@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ThemeService } from '../../services/theme.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,9 +10,18 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    public themeService: ThemeService
+  ) {}
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }

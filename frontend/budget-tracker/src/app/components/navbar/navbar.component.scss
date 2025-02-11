@@ -7,15 +7,21 @@
     border-bottom: 1px solid var(--color-border);
 }
 
-.navbar-brand a {
-    color: var(--color-primary);
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-decoration: none;
+.navbar-brand {
+    min-width: 18rem;
+    a {
+        color: var(--color-primary);
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+    }
 }
+
 .nav-links {
     display: flex;
     gap: 2rem;
+    justify-content: center;
+    flex: 1;
 
     button {
         position: relative; 
@@ -54,7 +60,9 @@
 
 .logout-settings {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
+    min-width: 18rem;
+    justify-content: flex-end;
 
     button {
         border: none;
@@ -102,4 +110,26 @@
         }
     }
     
+}
+
+.theme-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+        background-color: var(--light-purple);
+        color: var(--dark-purple);
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
 }
