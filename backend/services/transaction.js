@@ -30,46 +30,7 @@ const getRecentTransactions = async (userId) => {
 
 const getMonthlySummary = async (userId) => {
     try {
-        const now = new Date();
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-
-        const transactions = await TransactionModel.find({
-            userId,
-            date: {
-                $gte: startOfMonth,
-                $lte: endOfMonth
-            }
-        });
-
-        const conversionRates = {
-            'USD': 0.92,
-            'RSD': 0.0085,
-            'EUR': 1
-        };
-
-        let totalIncomeEUR = 0;
-        let totalExpensesEUR = 0;
-
-        transactions.forEach(transaction => {
-            const amountInEUR = transaction.amount * conversionRates[transaction.currency];
-            if (transaction.type === 'income') {
-                totalIncomeEUR += amountInEUR;
-            } else {
-                totalExpensesEUR += amountInEUR;
-            }
-        });
-
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'];
-
-        return {
-            totalIncomeEUR,
-            totalExpensesEUR,
-            netBalanceEUR: totalIncomeEUR - totalExpensesEUR,
-            month: monthNames[now.getMonth()],
-            year: now.getFullYear()
-        };
+        return await TransactionModel.getMonthlySummary(userId);
     } catch (error) {
         throw error;
     }

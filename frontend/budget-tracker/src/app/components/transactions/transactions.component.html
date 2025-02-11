@@ -41,8 +41,21 @@
         </div>
     </div>
 
+    <!-- Add this after the filters section and before the transactions list -->
+    <div class="status-messages">
+        <!-- Loading spinner -->
+        <div class="loading-spinner" *ngIf="loading">
+            Loading transactions...
+        </div>
+
+        <!-- Error message -->
+        <div class="error-message" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+    </div>
+
     <!-- Transactions list -->
-    <div class="transactions-list">
+    <div class="transactions-list" *ngIf="!loading">
         <div class="transaction-item" *ngFor="let transaction of transactions">
             <div class="transaction-info">
                 <div class="primary-info">

@@ -18,11 +18,16 @@ router.post("/",
     }
 )
 
-// get all of logged-in user's transaction
+/**
+ * GET /transaction
+ * Returns paginated transactions for authenticated user
+ * Supports filtering by type, category, date range and search
+ */
 router.get("/",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
         try {
+            // Parse query parameters
             const options = {
                 page: parseInt(req.query.page) || 1,
                 limit: parseInt(req.query.limit) || 10,
@@ -33,6 +38,7 @@ router.get("/",
                 endDate: req.query.endDate || undefined
             };
 
+            // Get filtered and paginated transactions
             const result = await transactionService.getPaginatedTransactions(req.user.id, options);
             res.json(result);
         } catch (error) {

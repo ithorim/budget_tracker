@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Transaction } from '../../models/transaction.model';
-import { TransactionService, TransactionFilters } from '../../services/transaction.service';
+import { Transaction, TransactionFilters } from '../../models/transaction.model';
+import { TransactionService } from '../../services/transaction.service';
+import { Router } from '@angular/router';
 
+/**
+ * Manages the transaction list view with filtering and pagination
+ * - Maintains filter state (type, category, search, dates)
+ * - Handles pagination controls
+ * - Updates view when filters/page changes
+ */
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -14,13 +21,14 @@ export class TransactionsComponent implements OnInit {
   totalPages = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 20, -1]; // -1 represents 'all'
-
+  
+  // Filter state
   filters: TransactionFilters = {
     page: 1,
     limit: 10
   };
 
-  // For filters
+  // Filter UI state
   selectedType: 'income' | 'expense' | '' = '';
   categories: string[] = [];
   selectedCategory = '';
@@ -28,24 +36,45 @@ export class TransactionsComponent implements OnInit {
   startDate?: Date;
   endDate?: Date;
 
-  constructor(private transactionService: TransactionService) {}
+  // UI state
+  loading = false;
+  errorMessage = '';
+
+  constructor(
+    private transactionService: TransactionService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadTransactions();
   }
 
   loadTransactions(): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    // onInit gets first page with 10 results
     this.transactionService.getTransactions(this.filters)
       .subscribe({
-        next: (response) => {
+        next: (response) => { 
           this.transactions = response.transactions;
           this.totalTransactions = response.total;
           this.currentPage = response.page;
           this.totalPages = response.totalPages;
+          this.loading = false;
         },
         error: (error) => {
+          this.loading = false;
           console.error('Error loading transactions:', error);
-          // TODO: Add error handling
+          
+          if (error.status === 401) {
+            this.errorMessage = 'Your session has expired. Please log in again.';
+            this.router.navigate(['/login']);
+          } else if (error.status === 400) {
+            this.errorMessage = error.error.message || 'Invalid request. Please check your filters.';
+          } else {
+            this.errorMessage = 'Unable to load transactions. Please try again later.';
+          }
         }
       });
   }

@@ -76,6 +76,10 @@ TransactionSchema.statics.getRecentTransactions = async function(userId) {
         .limit(5);
 }
 
+/**
+ * Static method to fetch paginated and filtered transactions
+ * Used by transaction service to get user's transactions
+ */
 TransactionSchema.statics.getPaginatedTransactions = async function(userId, options = {}) {
     const {
         page = 1,
@@ -87,10 +91,10 @@ TransactionSchema.statics.getPaginatedTransactions = async function(userId, opti
         search
     } = options;
 
-    // Build query
+    // Build base query with user ID
     const query = { userId };
     
-    // Add filters if they exist
+    // Add optional filters to query (those that exist)
     if (type) query.type = type;
     if (category) query.category = category;
     if (search) query.description = new RegExp(search, 'i');
@@ -114,6 +118,53 @@ TransactionSchema.statics.getPaginatedTransactions = async function(userId, opti
         total,
         page: Number(page),
         totalPages: limit === -1 ? 1 : Math.ceil(total / limit)
+    };
+}
+
+/**
+ * Static method to calculate monthly summary of transactions
+ * Converts all amounts to EUR and calculates totals
+ */
+TransactionSchema.statics.getMonthlySummary = async function(userId) {
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+    const transactions = await this.find({
+        userId,
+        date: {
+            $gte: startOfMonth,
+            $lte: endOfMonth
+        }
+    });
+
+    const conversionRates = {
+        'USD': 0.92,
+        'RSD': 0.0085,
+        'EUR': 1
+    };
+
+    let totalIncomeEUR = 0;
+    let totalExpensesEUR = 0;
+
+    transactions.forEach(transaction => {
+        const amountInEUR = transaction.amount * conversionRates[transaction.currency];
+        if (transaction.type === 'income') {
+            totalIncomeEUR += amountInEUR;
+        } else {
+            totalExpensesEUR += amountInEUR;
+        }
+    });
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+
+    return {
+        totalIncomeEUR,
+        totalExrensesEUR,
+        netBalanceEUR: totalIncomeEUR - totalExpensesEUR,
+        month: monthNames[now.getMonth()],
+        year: now.getFullYear()
     };
 }
 

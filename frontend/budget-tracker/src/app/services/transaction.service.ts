@@ -1,26 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Transaction } from '../models/transaction.model';
+import { Transaction, TransactionFilters, PaginatedTransactions } from '../models/transaction.model';
 import { Environment } from '../env/env';
 import { MonthlySummary } from '../models/monthly-summary.model';
-
-export interface TransactionFilters {
-  type?: 'income' | 'expense';
-  category?: string;
-  startDate?: Date;
-  endDate?: Date;
-  search?: string;
-  page?: number;
-  limit?: number;
-}
-
-export interface PaginatedTransactions {
-  transactions: Transaction[];
-  total: number;
-  page: number;
-  totalPages: number;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -54,9 +37,18 @@ export class TransactionService {
     return this.httpClient.get<MonthlySummary>(`${this.backUrl}/monthly-summary`, { headers: httpHeaders });
   }
 
+  /**
+   * Fetches paginated transactions with optional filters
+   * Flow:
+   * 1. Component calls this with optional TransactionFilters
+   * 2. Service builds query params from filters
+   * 3. Backend applies filters and returns paginated results
+   * 4. Component receives PaginatedTransactions and updates view
+   */
   getTransactions(filters: TransactionFilters = {}): Observable<PaginatedTransactions> {
     const token = localStorage.getItem('token');
     if (!token) {
+      // Return empty result if not authenticated
       return of({ transactions: [], total: 0, page: 1, totalPages: 0 });
     }
 
@@ -64,6 +56,13 @@ export class TransactionService {
       'Authorization': `Bearer ${token}`
     });
 
+    // Build query parameters from filters
+    // - page: current page number (default: 1)
+    // - limit: items per page (default: 10)
+    // - type: transaction type filter (income/expense)
+    // - category: transaction category filter
+    // - search: text search in description
+    // - startDate/endDate: date range filters
     const params = new HttpParams()
       .set('page', filters.page?.toString() || '1')
       .set('limit', filters.limit?.toString() || '10')
@@ -73,12 +72,28 @@ export class TransactionService {
       .set('startDate', filters.startDate?.toISOString() || '')
       .set('endDate', filters.endDate?.toISOString() || '');
 
+    // Make HTTP request to backend
+    // Backend will:
+    // 1. Apply filters to query
+    // 2. Calculate total matching records
+    // 3. Apply pagination
+    // 4. Return PaginatedTransactions containing:
+    //    - transactions: Transaction[] for current page
+    //    - total: total number of matching records
+    //    - page: current page number
+    //    - totalPages: total number of pages
     return this.httpClient.get<PaginatedTransactions>(
       `${this.backUrl}`,
       { headers: httpHeaders, params }
     );
   }
 
+  /**
+   * Returns predefined categories based on transaction type
+   * Used by transaction filters to populate category dropdown
+   * Would be better if it was not hard-coded but that required changing how categories are stored in
+   * The db. Might do it later
+   */
   getCategories(type: 'income' | 'expense'): string[] {
     return type === 'income' 
       ? ["Salary", "Freelance", "Investment", "Other Income"]
