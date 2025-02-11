@@ -25,7 +25,6 @@ export class AddTransactionModalComponent {
   errorMessage = '';
 
   constructor(private transactionService: TransactionService) {
-    // Initialize categories based on default type (expense)
     this.categories = this.transactionService.getCategories('expense');
     this.newTransaction.category = this.categories[0];
   }
@@ -49,9 +48,7 @@ export class AddTransactionModalComponent {
   }
 
   onTypeChange() {
-    // Update categories based on new type
     this.categories = this.transactionService.getCategories(this.newTransaction.type);
-    // Set the first category as default
     this.newTransaction.category = this.categories[0];
   }
 

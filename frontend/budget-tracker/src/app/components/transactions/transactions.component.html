@@ -1,8 +1,6 @@
 <div class="transactions-container">
-    <!-- Header with filters -->
     <div class="filters-section">
         <div class="filters-row">
-            <!-- Type filter -->
             <div class="filter-group">
                 <label for="type">Type</label>
                 <select id="type" [(ngModel)]="selectedType" (change)="onTypeChange()">
@@ -12,7 +10,6 @@
                 </select>
             </div>
 
-            <!-- Category filter -->
             <div class="filter-group">
                 <label for="category">Category</label>
                 <select id="category" [(ngModel)]="selectedCategory" (change)="onCategoryChange()" [disabled]="!selectedType">
@@ -23,7 +20,6 @@
                 </select>
             </div>
 
-            <!-- Date range filters -->
             <div class="filter-group">
                 <label for="startDate">From</label>
                 <input type="date" id="startDate" [(ngModel)]="startDate" (change)="onDateChange()">
@@ -33,7 +29,6 @@
                 <input type="date" id="endDate" [(ngModel)]="endDate" (change)="onDateChange()">
             </div>
 
-            <!-- Search -->
             <div class="filter-group search-group">
                 <input type="text" [(ngModel)]="searchQuery" placeholder="Search description...">
                 <button (click)="onSearch()">Search</button>
@@ -41,7 +36,6 @@
         </div>
     </div>
 
-    <!-- Add this new section right after the filters-section -->
     <div class="actions-section">
         <button class="add-transaction-button" (click)="openCreateModal()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -53,7 +47,6 @@
     </div>
 
     <div class="status-messages">
-        <!-- Loading spinner -->
         <div class="loading-spinner" *ngIf="loading">
             Loading transactions...
         </div>
@@ -62,7 +55,6 @@
         </div>
     </div>
 
-    <!-- Transactions list -->
     <div class="transactions-list" *ngIf="!loading">
         <div class="transaction-item" *ngFor="let transaction of transactions">
             <div class="transaction-info">
@@ -94,13 +86,11 @@
             </div>
         </div>
 
-        <!-- No transactions message -->
         <div class="no-transactions" *ngIf="transactions.length === 0">
             No transactions found
         </div>
     </div>
 
-    <!-- Pagination -->
     <div class="pagination-controls" *ngIf="totalTransactions > 0">
         <div class="page-size">
             <label>Show:</label>

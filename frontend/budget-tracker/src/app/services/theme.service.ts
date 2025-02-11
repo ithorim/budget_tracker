@@ -7,7 +7,7 @@ export class ThemeService {
   private darkTheme = false;
 
   constructor() {
-    // Check if user previously selected dark theme
+    // check if user previously selected dark theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       this.setDarkTheme(true);

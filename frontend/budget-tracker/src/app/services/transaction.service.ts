@@ -87,7 +87,7 @@ export class TransactionService {
     );
   }
 
-  // would be better if it was not hard-coded but that required changing how categories are stored in the db
+  // would be better if it was not hard-coded but that requires changing how categories are stored in the db
   // might do it later
   getCategories(type: 'income' | 'expense'): string[] {
     return type === 'income' 

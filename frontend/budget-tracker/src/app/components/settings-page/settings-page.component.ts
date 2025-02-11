@@ -108,7 +108,7 @@ export class SettingsPageComponent implements OnInit {
   }
 
   updatePassword() {
-    // Clear any existing messages
+    // clear any existing messages
     this.successMessage = '';
     this.errorMessage = '';
 
@@ -121,7 +121,7 @@ export class SettingsPageComponent implements OnInit {
         .subscribe({
             next: () => {
                 this.successMessage = 'Password updated successfully';
-                // Reset form
+                // reset form
                 this.currentPassword = '';
                 this.newPassword = '';
                 this.confirmPassword = '';
@@ -141,7 +141,7 @@ export class SettingsPageComponent implements OnInit {
         this.emailExists = false;
         return;
     }
-    // when your subscribe to an Observable, you will receive the actuacl boolean value
+    // when your subscribe to an Observable, you will receive the actual boolean value
     this.userService.checkEmailExists(this.updatedUser.email)
         .subscribe(exists => {
             this.emailExists = exists;

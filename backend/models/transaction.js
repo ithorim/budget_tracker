@@ -18,24 +18,22 @@ const TransactionSchema = new mongoose.Schema({
                 const expenseCategories = ["Food", "Rent", "Utilities", "Transport", "Entertainment", "Other Expense"];
                 
                 if (this.type === "income") {
-                    const isValid = incomeCategories.includes(value);
-                    if (!isValid) {
-                        this.invalidate('category', `For income transactions, category must be one of: ${incomeCategories.join(', ')}`);
-                    }
-                    return isValid;
+                    return incomeCategories.includes(value);
                 } else {
-                    const isValid = expenseCategories.includes(value);
-                    if (!isValid) {
-                        this.invalidate('category', `For expense transactions, category must be one of: ${expenseCategories.join(', ')}`);
-                    }
-                    return isValid;
+                    return expenseCategories.includes(value);
                 }
+            },
+            message: function(props) {
+                const incomeCategories = ["Salary", "Freelance", "Investment", "Other Income"];
+                const expenseCategories = ["Food", "Rent", "Utilities", "Transport", "Entertainment", "Other Expense"];
+                const validCategories = this.type === "income" ? incomeCategories : expenseCategories;
+                return `Category must be one of: ${validCategories.join(', ')} for ${this.type} type`;
             }
         }
     },
     date: { type: Date, default: Date.now },
-    description: { type: String}
-})
+    description: { type: String }
+});
 
 TransactionSchema.statics.createTransaction = async function(transactionData) {
     return await this.create(transactionData);
@@ -53,14 +51,16 @@ TransactionSchema.statics.getTransactionById = async function(id, userId) {
 }
 
 TransactionSchema.statics.updateTransaction = async function (id, userId, updatedData) {
-    const transaction = await this.findOneAndUpdate(
-        { _id: id, userId }, // find transaction with these fields
-        updatedData, // update with this data
-        { new: true, runValidators: true } // return new object
-    );
-    if(!transaction) throw new Error("Transaction not found.");
+    const existingTransaction = await this.findOne({ _id: id, userId });
+    if (!existingTransaction) {
+        throw new Error("Transaction not found.");
+    }
 
-    return transaction;
+    Object.assign(existingTransaction, updatedData);
+
+    await existingTransaction.save();
+
+    return existingTransaction;
 }
 
 TransactionSchema.statics.deleteTransaction = async function(id, userId) {

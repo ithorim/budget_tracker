@@ -21,15 +21,17 @@ export class EditTransactionModalComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['transaction'] && this.transaction) {
-      // create a deep copy of the transaction
       this.editedTransaction = {
         ...this.transaction,
-        date: new Date(this.transaction.date)
+        date: new Date(this.transaction.date),
+        amount: Number(this.transaction.amount),
+        type: this.transaction.type as 'income' | 'expense',
+        currency: this.transaction.currency as 'EUR' | 'USD' | 'RSD'
       };
-      // get categories based on transaction type
-      this.categories = this.transactionService.getCategories(this.transaction.type);
-      // if no category is set, set the first category as default
-      if (!this.editedTransaction.category) {
+      
+      this.categories = this.transactionService.getCategories(this.editedTransaction.type);
+      
+      if (!this.editedTransaction.category || !this.categories.includes(this.editedTransaction.category)) {
         this.editedTransaction.category = this.categories[0];
       }
     }
@@ -42,23 +44,45 @@ export class EditTransactionModalComponent implements OnChanges {
   onSubmit() {
     if (!this.editedTransaction) return;
 
-    this.transactionService.updateTransaction(this.editedTransaction).subscribe({
-      next: () => {
-        this.transactionUpdated.emit();
-        this.close.emit();
-      },
-      error: (error) => {
-        this.errorMessage = error.error.message || 'Error updating transaction';
-      }
+    if (this.editedTransaction.amount < 1) {
+        this.errorMessage = 'Amount must be greater than 0';
+        return;
+    }
+
+    const formattedTransaction = {
+        ...this.editedTransaction,
+        amount: Number(this.editedTransaction.amount),
+        date: new Date(this.editedTransaction.date),
+        type: this.editedTransaction.type as 'income' | 'expense',
+        category: this.editedTransaction.category,
+        currency: this.editedTransaction.currency as 'EUR' | 'USD' | 'RSD'
+    };
+
+    const validCategories = this.transactionService.getCategories(formattedTransaction.type);
+    if (!validCategories.includes(formattedTransaction.category)) {
+        this.errorMessage = `Invalid category for ${formattedTransaction.type} type. Please select from: ${validCategories.join(', ')}`;
+        return;
+    }
+
+    this.transactionService.updateTransaction(formattedTransaction).subscribe({
+        next: () => {
+            this.transactionUpdated.emit();
+            this.close.emit();
+        },
+        error: (error) => {
+            if (error.error?.message) {
+                this.errorMessage = error.error.message;
+            } else {
+                this.errorMessage = 'Error updating transaction. Please check all fields and try again.';
+            }
+        }
     });
   }
 
   onTypeChange() {
     if (this.editedTransaction) {
-      // update categories based on new type
-      this.categories = this.transactionService.getCategories(this.editedTransaction.type);
-      // set the first category as default instead of empty string
-      this.editedTransaction.category = this.categories[0];
+        this.categories = this.transactionService.getCategories(this.editedTransaction.type);
+        this.editedTransaction.category = this.categories[0];
     }
   }
 } 

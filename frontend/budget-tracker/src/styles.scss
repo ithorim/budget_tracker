@@ -22,12 +22,12 @@ body {
 }
 
 html {
-  // had to add this as if dashboard was causing the scroll bar to appear while other pages did not
+  // had to add this bcs the dashboard was causing scroll bar to appear while other pages did not
   // thus resulting in movement of elements between different routerLinkActive pages
-  overflow-y: scroll; /* Always show vertical scrollbar */
+  overflow-y: scroll; // always show vertical scrollbar
 }
 
-// Global input and select styles
+// global input and select styles
 input,
 select {
     background-color: var(--input-background);
