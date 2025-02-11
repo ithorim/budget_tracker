@@ -43,6 +43,8 @@ export class TransactionsComponent implements OnInit {
   // Add to existing properties
   selectedTransaction: Transaction | null = null;
   isEditModalOpen = false;
+  isDeleteModalOpen = false;
+  isCreateModalOpen = false;
 
   constructor(
     private transactionService: TransactionService,
@@ -126,7 +128,7 @@ export class TransactionsComponent implements OnInit {
     this.loadTransactions();
   }
 
-  // Add these methods
+  // edit transaction modal
   openEditModal(transaction: Transaction) {
     this.selectedTransaction = transaction;
     this.isEditModalOpen = true;
@@ -139,5 +141,29 @@ export class TransactionsComponent implements OnInit {
 
   onTransactionUpdated() {
     this.loadTransactions();
+  }
+
+  // delete transaction modal
+  openDeleteModal(transaction: Transaction) {
+    this.selectedTransaction = transaction;
+    this.isDeleteModalOpen = true;
+  }
+
+  closeDeleteModal() {
+    this.selectedTransaction = null;
+    this.isDeleteModalOpen = false;
+  }
+
+  onTransactionDeleted() {
+    this.loadTransactions();
+  }
+
+  // create transaction modal
+  openCreateModal() {
+    this.isCreateModalOpen = true;
+  }
+
+  closeCreateModal() {
+    this.isCreateModalOpen = false;
   }
 }

@@ -1,0 +1,93 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Add Transaction</h2>
+      <button class="close-button" (click)="onClose()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input 
+            type="text" 
+            id="description" 
+            [(ngModel)]="newTransaction.description" 
+            name="description"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select 
+            id="type" 
+            [(ngModel)]="newTransaction.type" 
+            name="type"
+            required
+            (change)="onTypeChange()">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input 
+            type="number" 
+            id="amount" 
+            [(ngModel)]="newTransaction.amount" 
+            name="amount"
+            required
+            min="1"
+            step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <select 
+            id="currency" 
+            [(ngModel)]="newTransaction.currency" 
+            name="currency"
+            required>
+            <option value="RSD">RSD</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select 
+            id="category" 
+            [(ngModel)]="newTransaction.category" 
+            name="category"
+            required>
+            <option *ngFor="let category of categories" [value]="category">
+              {{category}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input 
+            type="date" 
+            id="date" 
+            [ngModel]="newTransaction.date | date:'yyyy-MM-dd'" 
+            (ngModelChange)="newTransaction.date = $event"
+            name="date"
+            required>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="cancel-button" (click)="onClose()">Cancel</button>
+          <button type="submit" class="save-button">Add Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,29 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Delete Transaction</h2>
+      <button class="close-button" (click)="onClose()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="confirmation-message">
+        <p>Are you sure you want to delete this transaction?</p>
+        <div class="transaction-details" *ngIf="transaction">
+          <p>Description: {{ transaction.description }}</p>
+          <p>Amount: {{ transaction.amount | currency:transaction.currency:'symbol':'1.2-2' }}</p>
+          <p>Category: {{ transaction.category }}</p>
+          <p>Date: {{ transaction.date | date:'mediumDate' }}</p>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="cancel-button" (click)="onClose()">Cancel</button>
+        <button type="button" class="delete-button" (click)="onSubmit()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

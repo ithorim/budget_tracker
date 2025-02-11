@@ -116,4 +116,36 @@ export class TransactionService {
       { headers }
     );
   }
+
+  deleteTransaction(transaction: Transaction): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('No authentication token'));
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.httpClient.delete(
+      `${this.backUrl}/${transaction._id}`, { headers }
+    );
+  }
+
+  createTransaction(transaction: Transaction): Observable<Transaction> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('No authentication token'));
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.httpClient.post<Transaction>(
+      `${this.backUrl}/`,
+      transaction,
+      { headers }
+    );
+  }
 }
