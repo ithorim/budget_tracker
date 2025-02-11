@@ -41,6 +41,10 @@ A full-stack web application for personal finance management. Built with Angular
    ```
 4. Visit `http://localhost:4200` in your browser
 
+
+https://github.com/user-attachments/assets/2ab3e704-4401-45e7-852f-a9aea7591389
+
+
 ## TODO
 
 - [ ] Update CSS for better responsive design:
